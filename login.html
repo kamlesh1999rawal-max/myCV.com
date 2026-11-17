@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myCV.com | Create account or sign in</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Behaviour -->
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="navbar">
+    <a href="index.html" class="logo">my<span>CV</span>.com</a>
+    <a href="index.html" class="login-btn">Home</a>
+  </header>
+
+  <main class="auth">
+    <div class="auth-shell">
+
+      <!-- ================= LEFT SIDE: dark premium panel ================= -->
+      <aside class="auth-aside">
+        <div class="aside-top">
+          <div class="aside-eyebrow">Members area</div>
+          <h2>Your career, <em>beautifully</em> presented.</h2>
+          <div class="aside-line"></div>
+        </div>
+
+        <!-- A small CV drawn with CSS -->
+        <div class="cv-preview" aria-hidden="true">
+          <div class="cv-head">
+            <div class="cv-photo"></div>
+            <div class="cv-head-lines">
+              <div class="cv-bar cv-bar-name"></div>
+              <div class="cv-bar cv-bar-role"></div>
+            </div>
+          </div>
+          <div class="cv-section"></div>
+          <div class="cv-bar"></div>
+          <div class="cv-bar cv-bar-short"></div>
+          <div class="cv-section"></div>
+          <div class="cv-bar"></div>
+          <div class="cv-bar"></div>
+          <div class="cv-bar cv-bar-short"></div>
+        </div>
+
+        <ul class="aside-list">
+          <li>Premium templates made to impress recruiters</li>
+          <li>Your CV stays saved, edit it any time</li>
+          <li>Download and send it in one click</li>
+        </ul>
+      </aside>
+
+      <!-- ================= RIGHT SIDE: the forms ================= -->
+      <div class="auth-card">
+
+        <!-- The two options at the top -->
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab active" id="tab-create" data-tab="create">Create Account</button>
+          <button type="button" class="auth-tab" id="tab-signin" data-tab="signin">Sign In</button>
+        </div>
+
+        <!-- ---------- CREATE ACCOUNT ---------- -->
+        <section class="auth-panel active" id="panel-create">
+          <h1>Create your account</h1>
+          <p class="auth-sub">Start building your CV in minutes.</p>
+
+          <div class="social-list">
+            <button type="button" class="social-btn" data-provider="Google">
+              <span class="social-badge">G</span>
+              <span class="social-label">Continue with Google</span>
+            </button>
+            <button type="button" class="social-btn" data-provider="Facebook">
+              <span class="social-badge">F</span>
+              <span class="social-label">Continue with Facebook</span>
+            </button>
+            <button type="button" class="social-btn" data-provider="LinkedIn">
+              <span class="social-badge">L</span>
+              <span class="social-label">Continue with LinkedIn</span>
+            </button>
+          </div>
+
+          <div class="auth-divider"><span>or with email</span></div>
+
+          <form id="create-form" novalidate>
+            <div class="field">
+              <label for="create-name">Full name</label>
+              <input type="text" id="create-name" name="name" placeholder="Kamlesh Rawal" autocomplete="name">
+            </div>
+
+            <div class="field">
+              <label for="create-email">Email</label>
+              <input type="email" id="create-email" name="email" placeholder="you@example.com" autocomplete="email">
+            </div>
+
+            <div class="field">
+              <label for="create-password">New password</label>
+              <div class="input-wrap">
+                <input type="password" id="create-password" name="password" placeholder="At least 8 characters" autocomplete="new-password">
+                <button type="button" class="toggle-password" data-target="create-password">Show</button>
+              </div>
+              <!-- Password strength: script.js fills these bars -->
+              <div class="strength" id="strength" data-level="0">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <p class="strength-text" id="strength-text">Use 8 or more characters with letters, numbers and symbols.</p>
+            </div>
+
+            <div class="field">
+              <label for="create-confirm">Confirm password</label>
+              <div class="input-wrap">
+                <input type="password" id="create-confirm" name="confirm" placeholder="Type the password again" autocomplete="new-password">
+                <button type="button" class="toggle-password" data-target="create-confirm">Show</button>
+              </div>
+            </div>
+
+            <p class="form-message" id="create-message" role="alert"></p>
+
+            <button type="submit" class="submit-btn">Create Account <span class="arrow">&rarr;</span></button>
+          </form>
+
+          <p class="switch-text">
+            Already have an account? <a href="#signin" data-tab="signin">Sign in</a>
+          </p>
+        </section>
+
+        <!-- ---------- SIGN IN ---------- -->
+        <section class="auth-panel" id="panel-signin">
+          <h1>Welcome back</h1>
+          <p class="auth-sub">Sign in to continue your CV.</p>
+
+          <div class="social-list">
+            <button type="button" class="social-btn" data-provider="Google">
+              <span class="social-badge">G</span>
+              <span class="social-label">Continue with Google</span>
+            </button>
+            <button type="button" class="social-btn" data-provider="Facebook">
+              <span class="social-badge">F</span>
+              <span class="social-label">Continue with Facebook</span>
+            </button>
+            <button type="button" class="social-btn" data-provider="LinkedIn">
+              <span class="social-badge">L</span>
+              <span class="social-label">Continue with LinkedIn</span>
+            </button>
+          </div>
+
+          <div class="auth-divider"><span>or with email</span></div>
+
+          <form id="signin-form" novalidate>
+            <div class="field">
+              <label for="signin-email">Email</label>
+              <input type="email" id="signin-email" name="email" placeholder="you@example.com" autocomplete="email">
+            </div>
+
+            <div class="field">
+              <label for="signin-password">Password</label>
+              <div class="input-wrap">
+                <input type="password" id="signin-password" name="password" placeholder="Your password" autocomplete="current-password">
+                <button type="button" class="toggle-password" data-target="signin-password">Show</button>
+              </div>
+            </div>
+
+            <p class="form-message" id="signin-message" role="alert"></p>
+
+            <button type="submit" class="submit-btn">Sign In <span class="arrow">&rarr;</span></button>
+          </form>
+
+          <p class="switch-text">
+            New to myCV.com? <a href="#create" data-tab="create">Create account</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; <span id="year">2026</span> myCV.com. All rights reserved.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myCV.com | Choose your template</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,500;1,700&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Archivo:wght@500;800&family=DM+Sans:wght@400;500;700&family=Outfit:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Cinzel:wght@500;700&family=Jost:wght@400;500;600&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Sora:wght@400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Design -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Behaviour -->
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="navbar">
+    <a href="index.html" class="logo">my<span>CV</span>.com</a>
+    <div class="nav-actions">
+      <a href="mycvs.html" class="login-btn folder-btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2 2.2h8.4A1.5 1.5 0 0 1 21 8.7v8.8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>
+        My CVs
+      </a>
+      <a href="index.html" class="login-btn" data-signout>Sign Out</a>
+    </div>
+  </header>
+
+  <main class="templates">
+
+    <!-- Heading -->
+    <div class="tpl-intro">
+      <div class="tagline">Step 1 of 2</div>
+      <h1>Choose your <em>template</em></h1>
+      <div class="divider"></div>
+      <p>Pick the design you like. You can fill in your details on the next page.</p>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="tpl-filters">
+      <button type="button" class="tpl-filter active" data-filter="all">All</button>
+      <button type="button" class="tpl-filter" data-filter="professional">Professional</button>
+      <button type="button" class="tpl-filter" data-filter="creative">Creative</button>
+      <button type="button" class="tpl-filter" data-filter="simple">Simple</button>
+    </div>
+
+    <!-- Template cards -->
+    <div class="tpl-grid">
+
+      <!-- 1. Classic -->
+      <article class="tpl-card" data-template="Classic" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-classic">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-contact">hello@mycv.com &middot; +00 123 456 789 &middot; City</div>
+              <div class="c-rule"></div>
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p>Led a team of 5 and planned yearly campaigns.</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p>Managed social media and email marketing.</p>
+              <div class="c-h">Skills</div>
+              <p>Branding &middot; SEO &middot; Content &middot; Analytics</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <p>Redesigned the brand and the website.</p>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Classic</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A timeless one-column CV that suits any job.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 2. Modern -->
+      <article class="tpl-card" data-template="Modern" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-modern">
+              <div class="c-side">
+              <div class="c-photo">AM</div>
+              <div class="c-h">Contact</div>
+              <p>hello@mycv.com<br>+00 123 456 789<br>City</p>
+              <div class="c-h">Skills</div>
+              <p>Branding<br>SEO<br>Content<br>Analytics</p>
+              </div>
+              <div class="c-main">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p class="c-place">Bright Media</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p class="c-place">Nova Retail</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing</b><span>2021</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Modern</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A dark side panel for your photo, contact and skills.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 3. Executive -->
+      <article class="tpl-card" data-template="Executive" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-executive">
+              <div class="c-band">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-contact">hello@mycv.com &middot; +00 123 456 789 &middot; City</div>
+              </div>
+              <div class="c-body">
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p>Led a team of 5 and planned yearly campaigns.</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p>Managed social media and email marketing.</p>
+              <div class="c-h">Skills</div>
+              <p>Branding &middot; SEO &middot; Content &middot; Analytics</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <p>Redesigned the brand and the website.</p>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Executive</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A bold gold header for senior and management roles.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 7. Timeline -->
+      <article class="tpl-card" data-template="Timeline" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-timeline x-tpl"><div class="x-head"><div class="x-head-main"><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div><div class="x-contact"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div></div><div class="x-cols"><div class="x-col x-col-wide"><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div><div class="x-col"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-chips"><span>Branding</span><span>SEO</span><span>Content</span><span>Analytics</span></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Timeline</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>Two columns with a dotted timeline for your work experience.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 8. Swiss Grid -->
+      <article class="tpl-card" data-template="Swiss Grid" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-swiss-grid x-tpl"><div class="x-head"><div class="x-head-main"><div class="c-name">Alex Morgan</div><div class="x-sub"><div class="c-role">Marketing Manager</div><div class="x-contact">+00 123 456 789 &nbsp;/&nbsp; hello@mycv.com &nbsp;/&nbsp; City, Country</div></div></div></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><p>Branding · SEO · Content · Analytics</p></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Swiss Grid</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A bold name on top with section titles in a tidy left column.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 9. Sage Sidebar -->
+      <article class="tpl-card" data-template="Sage Sidebar" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-sage-sidebar x-tpl"><div class="x-side"><div class="x-side-top"><div class="c-photo">AM</div><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div><div class="x-side-body"><section class="c-sec c-sec-contact"><div class="c-h">Personal Details</div><div class="c-sec-body"><div class="x-kvs"><div><div class="x-label">Phone</div><div>+00 123 456 789</div></div><div><div class="x-label">Email</div><div>hello@mycv.com</div></div><div><div class="x-label">Location</div><div>City, Country</div></div></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-skill-list"><div>Branding</div><div>SEO</div><div>Content</div><div>Analytics</div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div><div class="x-main"><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Sage Sidebar</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A soft green side panel for your photo, contact and skills.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 10. Header Band -->
+      <article class="tpl-card" data-template="Header Band" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-header-band x-tpl"><div class="x-band"><div class="x-head-main"><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div><div class="x-tag">Curriculum Vitae</div></div><div class="x-strip"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div><div class="x-cols"><div class="x-col x-col-wide"><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div><div class="x-col"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-chips"><span>Branding</span><span>SEO</span><span>Content</span><span>Analytics</span></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Header Band</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>A strong colour band on top with every section in its own box.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 11. Mono Index -->
+      <article class="tpl-card" data-template="Mono Index" data-category="professional">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-mono-index x-tpl"><div class="x-head"><div class="x-head-main"><div class="x-kicker">// curriculum vitae</div><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div><div class="x-contact"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section><div class="x-three"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-skill-list"><div>Branding</div><div>SEO</div><div>Content</div><div>Analytics</div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Mono Index</h2>
+            <span class="tpl-tag">Professional</span>
+          </div>
+          <p>Numbered sections in a typewriter style, made for tech jobs.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 4. Minimal -->
+      <article class="tpl-card" data-template="Minimal" data-category="simple">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-minimal">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-contact">hello@mycv.com &middot; +00 123 456 789 &middot; City</div>
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p class="c-place">Bright Media</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p class="c-place">Nova Retail</p>
+              <div class="c-h">Skills</div>
+              <p>Branding &middot; SEO &middot; Content &middot; Analytics</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Minimal</h2>
+            <span class="tpl-tag">Simple</span>
+          </div>
+          <p>Clean and light, with plenty of white space.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 5. Creative -->
+      <article class="tpl-card" data-template="Creative" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-creative">
+              <div class="c-main">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p class="c-place">Bright Media</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p class="c-place">Nova Retail</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing</b><span>2021</span></div>
+              </div>
+              <div class="c-side">
+              <div class="c-photo">AM</div>
+              <div class="c-h">Contact</div>
+              <p>hello@mycv.com<br>+00 123 456 789<br>City</p>
+              <div class="c-h">Skills</div>
+              <p>Branding<br>SEO<br>Content<br>Analytics</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Creative</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>A colourful panel for designers and creative jobs.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 12. Noir Gold -->
+      <article class="tpl-card" data-template="Noir Gold" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-noir-gold x-tpl"><div class="x-hero"><div class="x-kicker">Curriculum Vitae</div><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div><div class="x-rule"></div><div class="x-contact"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div></div><div class="x-cols"><div class="x-col"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-skill-list"><div>Branding</div><div>SEO</div><div>Content</div><div>Analytics</div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div><div class="x-divider"></div><div class="x-col x-col-wide"><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Noir Gold</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>A black header with gold details for a luxury feel.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 13. Vertical Name -->
+      <article class="tpl-card" data-template="Vertical Name" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-vertical-name x-tpl"><div class="x-band"><div class="c-name">Alex Morgan</div></div><div class="x-main"><div class="x-head"><div class="x-head-main"><div class="c-role">Marketing Manager</div><div class="x-contact"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div></div></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><div class="x-cols"><div class="x-col x-col-wide"><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div><div class="x-col"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-chips"><span>Branding</span><span>SEO</span><span>Content</span><span>Analytics</span></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Vertical Name</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>Your name runs up a bold colour band on the left.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 14. Bento Tiles -->
+      <article class="tpl-card" data-template="Bento Tiles" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-bento-tiles x-tpl"><div class="x-col x-col-wide"><div class="x-hero"><div class="x-head-main"><div class="x-kicker">Curriculum Vitae</div><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div><div class="x-col"><section class="c-sec c-sec-contact"><div class="c-h">Personal Details</div><div class="c-sec-body"><div class="x-kvs"><div><div class="x-label">Phone</div><div>+00 123 456 789</div></div><div><div class="x-label">Email</div><div>hello@mycv.com</div></div><div><div class="x-label">Location</div><div>City, Country</div></div></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-chips"><span>Branding</span><span>SEO</span><span>Content</span><span>Analytics</span></div></div></section><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Bento Tiles</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>Every section sits in its own rounded colour tile.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 15. Orbit -->
+      <article class="tpl-card" data-template="Orbit" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-orbit x-tpl"><div class="x-orb"></div><div class="x-ring"></div><div class="x-top"><div class="x-id"><div class="c-name">Alex Morgan</div><div class="c-role">Marketing Manager</div></div><div class="x-intro"><div class="x-contact"><div>+00 123 456 789</div><div>hello@mycv.com</div><div>City, Country</div></div><div class="x-rule"></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section></div></div><div class="x-cols"><div class="x-col"><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-skill-list"><div>Branding</div><div>SEO</div><div>Content</div><div>Analytics</div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div><div class="x-col x-col-wide"><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Orbit</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>A large circle behind your name, calm and modern.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 16. Front Page -->
+      <article class="tpl-card" data-template="Front Page" data-category="creative">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-front-page x-tpl"><div class="x-masthead"><div>Curriculum Vitae</div><div>City, Country</div><div>Edition 2026</div></div><div class="c-name">Alex Morgan</div><div class="x-bar"><div class="c-role">Marketing Manager</div><div>+00 123 456 789</div><div>hello@mycv.com</div></div><section class="c-sec c-sec-objective"><div class="c-h">Career Objective</div><div class="c-sec-body"><p>Marketing manager with 6 years of experience, looking to lead brand growth at a global company.</p></div></section><div class="x-cols"><div class="x-col x-col-wide"><section class="c-sec c-sec-exp"><div class="c-h">Work Experience</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Marketing Manager</b><span>Mar 2022 - Present</span></div><p class="c-place">Bright Media</p><p>Led a team of 5 and planned yearly campaigns.</p></div><div class="c-entry"><div class="c-item"><b>Marketing Executive</b><span>Jun 2019 - Feb 2022</span></div><p class="c-place">Nova Retail</p><p>Managed social media and email marketing.</p></div></div></section><section class="c-sec c-sec-projects"><div class="c-h">Projects</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Brand Relaunch</b><span>Jan 2023 - Aug 2023</span></div><p class="c-place">Project lead</p><div class="c-rich"><ul><li>Redesigned the brand and the website.</li><li>Grew website visits by <b>40%</b>.</li></ul></div></div></div></section></div><div class="x-divider"></div><div class="x-col"><section class="c-sec c-sec-education"><div class="c-h">Education</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div><p class="c-place">City University</p></div></div></section><section class="c-sec c-sec-skills"><div class="c-h">Skills</div><div class="c-sec-body"><div class="c-skill-list"><div>Branding</div><div>SEO</div><div>Content</div><div>Analytics</div></div></div></section><section class="c-sec c-sec-certs"><div class="c-h">Certifications</div><div class="c-sec-body"><div class="c-entry"><div class="c-item"><b>Digital Marketing Certificate</b><span>2021</span></div><p class="c-place">Marketing Institute</p></div></div></section></div></div></div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Front Page</h2>
+            <span class="tpl-tag">Creative</span>
+          </div>
+          <p>Laid out like a newspaper front page, great for writers.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+      <!-- 6. Elegant -->
+      <article class="tpl-card" data-template="Elegant" data-category="simple">
+        <div class="tpl-thumb-wrap">
+          <!-- A sample CV, drawn at full size and shrunk to fit -->
+          <div class="thumb-box" aria-hidden="true">
+            <div class="thumb t-elegant">
+              <div class="c-name">Alex Morgan</div>
+              <div class="c-role">Marketing Manager</div>
+              <div class="c-contact">hello@mycv.com &middot; +00 123 456 789 &middot; City</div>
+              <div class="c-rule"></div>
+              <div class="c-cols">
+              <div class="c-col">
+              <div class="c-h">Career Objective</div>
+              <p>Marketing manager looking to lead brand growth at a global company.</p>
+              <div class="c-h">Education</div>
+              <div class="c-item"><b>BBA, Marketing</b><span>2015 - 2019</span></div>
+              <p class="c-place">City University</p>
+              <div class="c-h">Skills</div>
+              <p>Branding &middot; SEO &middot; Content &middot; Analytics</p>
+              <div class="c-h">Certifications</div>
+              <div class="c-item"><b>Digital Marketing</b><span>2021</span></div>
+              </div>
+              <div class="c-col">
+              <div class="c-h">Work Experience</div>
+              <div class="c-item"><b>Marketing Manager</b><span>2022 - Now</span></div>
+              <p>Led a team of 5 and planned yearly campaigns.</p>
+              <div class="c-item"><b>Marketing Executive</b><span>2019 - 2022</span></div>
+              <p>Managed social media and email marketing.</p>
+              <div class="c-h">Projects</div>
+              <div class="c-item"><b>Brand Relaunch</b><span>2023</span></div>
+              <p>Redesigned the brand and the website.</p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tpl-info">
+          <div class="tpl-top">
+            <h2>Elegant</h2>
+            <span class="tpl-tag">Simple</span>
+          </div>
+          <p>A centered name with two neat columns below.</p>
+          <button type="button" class="tpl-select">Use this template</button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Bar at the bottom: shows the chosen template and the Continue button -->
+  <div class="tpl-bar">
+    <p id="tpl-chosen">Choose a template to continue.</p>
+    <a href="create.html" class="tpl-continue disabled" id="tpl-continue" aria-disabled="true">Continue <span class="arrow">&rarr;</span></a>
+  </div>
+
+</body>
+</html>

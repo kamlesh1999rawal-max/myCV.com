@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myCV.com | Build your CV</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,500;1,700&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Archivo:wght@500;800&family=DM+Sans:wght@400;500;700&family=Outfit:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Cinzel:wght@500;700&family=Jost:wght@400;500;600&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Sora:wght@400;600;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Design -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Behaviour -->
+  <script src="script.js"></script>
+  <script src="builder.js"></script>
+</head>
+<body class="builder-page">
+
+  <!-- Top bar: Download sits next to Sign Out -->
+  <header class="navbar">
+    <a href="index.html" class="logo">my<span>CV</span>.com</a>
+    <div class="nav-actions">
+      <button type="button" class="download-btn" id="download-btn">Download</button>
+      <a href="mycvs.html" class="login-btn folder-btn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2 2.2h8.4A1.5 1.5 0 0 1 21 8.7v8.8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>
+        My CVs
+      </a>
+      <a href="index.html" class="login-btn" data-signout>Sign Out</a>
+    </div>
+  </header>
+
+  <main class="builder">
+
+    <!-- ================= LEFT SIDE: the form ================= -->
+    <div class="editor" id="editor">
+
+      <div class="builder-intro">
+        <div class="tagline">Step 2 of 2</div>
+        <h1>Fill in your <em>details</em></h1>
+        <p>Your CV updates on the right as you type, on the same screen. Sample text is filled in to show you how it works. Replace it with your own. When you finish, press Save CV to keep it in My CVs.</p>
+        <div class="builder-links">
+          <a href="templates.html">&larr; Change template</a>
+          <button type="button" class="link-btn" id="clear-btn">Clear all fields</button>
+        </div>
+      </div>
+
+      <!-- 1. Personal details -->
+      <details class="ed-section" open>
+        <summary><span class="ed-num">1</span>Personal Details</summary>
+        <div class="ed-body">
+          <!-- Profile photo: chosen from the gallery (phone) or the computer -->
+          <div class="photo-row">
+            <div class="photo-preview" id="photo-preview"></div>
+            <div class="photo-actions">
+              <div class="photo-buttons">
+                <label for="photo-input" class="photo-btn">Upload profile photo</label>
+                <button type="button" class="remove-btn" id="photo-remove" hidden>Remove photo</button>
+              </div>
+              <input type="file" id="photo-input" class="visually-hidden" accept="image/*">
+              <p class="photo-hint">Choose a photo from your gallery or computer. JPG or PNG.</p>
+              <p class="form-message" id="photo-message" role="alert"></p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="p-name">Full name</label>
+              <input type="text" id="p-name" data-field="name" placeholder="Your full name">
+            </div>
+            <div class="field">
+              <label for="p-title">Job title</label>
+              <input type="text" id="p-title" data-field="title" placeholder="Marketing Manager">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="p-email">Email</label>
+              <input type="email" id="p-email" data-field="email" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="p-phone">Phone</label>
+              <!-- country code + phone number side by side -->
+              <div class="phone-row">
+                <select id="p-code" data-field="phoneCode" aria-label="Country code">
+                  <option value="">Code</option>
+                  <option value="+61">+61 Australia</option>
+                  <option value="+880">+880 Bangladesh</option>
+                  <option value="+55">+55 Brazil</option>
+                  <option value="+1">+1 Canada</option>
+                  <option value="+86">+86 China</option>
+                  <option value="+20">+20 Egypt</option>
+                  <option value="+33">+33 France</option>
+                  <option value="+49">+49 Germany</option>
+                  <option value="+91">+91 India</option>
+                  <option value="+62">+62 Indonesia</option>
+                  <option value="+39">+39 Italy</option>
+                  <option value="+81">+81 Japan</option>
+                  <option value="+60">+60 Malaysia</option>
+                  <option value="+52">+52 Mexico</option>
+                  <option value="+977">+977 Nepal</option>
+                  <option value="+31">+31 Netherlands</option>
+                  <option value="+64">+64 New Zealand</option>
+                  <option value="+234">+234 Nigeria</option>
+                  <option value="+92">+92 Pakistan</option>
+                  <option value="+63">+63 Philippines</option>
+                  <option value="+7">+7 Russia</option>
+                  <option value="+966">+966 Saudi Arabia</option>
+                  <option value="+65">+65 Singapore</option>
+                  <option value="+27">+27 South Africa</option>
+                  <option value="+82">+82 South Korea</option>
+                  <option value="+34">+34 Spain</option>
+                  <option value="+94">+94 Sri Lanka</option>
+                  <option value="+66">+66 Thailand</option>
+                  <option value="+90">+90 Turkey</option>
+                  <option value="+971">+971 United Arab Emirates</option>
+                  <option value="+44">+44 United Kingdom</option>
+                  <option value="+1">+1 United States</option>
+                  <option value="+84">+84 Vietnam</option>
+                </select>
+                <input type="tel" id="p-phone" data-field="phone" placeholder="123 456 789">
+              </div>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="p-country">Country</label>
+              <input type="text" id="p-country" data-field="country" placeholder="Your country">
+            </div>
+            <div class="field">
+              <label for="p-province">Province</label>
+              <input type="text" id="p-province" data-field="province" placeholder="Your province">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="p-district">District</label>
+              <input type="text" id="p-district" data-field="district" placeholder="Your district">
+            </div>
+            <div class="field">
+              <label for="p-link">Website or LinkedIn</label>
+              <input type="text" id="p-link" data-field="link" placeholder="linkedin.com/in/yourname">
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. Career objective -->
+      <details class="ed-section" open>
+        <summary><span class="ed-num">2</span>Career Objective</summary>
+        <div class="ed-body">
+          <div class="field">
+            <label for="p-objective">Write 2 or 3 sentences about your goal</label>
+            <textarea id="p-objective" data-field="objective" rows="4" placeholder="What kind of job are you looking for, and what do you bring?"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. Education -->
+      <details class="ed-section">
+        <summary><span class="ed-num">3</span>Education</summary>
+        <div class="ed-body">
+          <div class="entry-list" data-list="education"></div>
+          <button type="button" class="add-btn" data-add="education">+ Add education</button>
+        </div>
+      </details>
+
+      <!-- 4. Work experience -->
+      <details class="ed-section">
+        <summary><span class="ed-num">4</span>Work Experience</summary>
+        <div class="ed-body">
+          <div class="entry-list" data-list="experience"></div>
+          <button type="button" class="add-btn" data-add="experience">+ Add work experience</button>
+        </div>
+      </details>
+
+      <!-- 5. Skills -->
+      <details class="ed-section">
+        <summary><span class="ed-num">5</span>Skills</summary>
+        <div class="ed-body">
+          <div class="field">
+            <label for="p-skills">Your skills, separated by commas</label>
+            <input type="text" id="p-skills" data-field="skills" placeholder="Branding, SEO, Content, Analytics">
+          </div>
+        </div>
+      </details>
+
+      <!-- 6. Projects -->
+      <details class="ed-section">
+        <summary><span class="ed-num">6</span>Projects</summary>
+        <div class="ed-body">
+          <div class="entry-list" data-list="projects"></div>
+          <button type="button" class="add-btn" data-add="projects">+ Add project</button>
+        </div>
+      </details>
+
+      <!-- 7. Certifications -->
+      <details class="ed-section">
+        <summary><span class="ed-num">7</span>Certifications</summary>
+        <div class="ed-body">
+          <div class="entry-list" data-list="certifications"></div>
+          <button type="button" class="add-btn" data-add="certifications">+ Add certification</button>
+        </div>
+      </details>
+
+      <!-- Sections that people add themselves appear here -->
+      <div class="entry-list custom-list" data-list="custom"></div>
+
+      <button type="button" class="add-section-btn" data-add="custom">+ Add Section</button>
+      <p class="add-section-hint">Add your own section, for example Languages, Awards, Hobbies or References.</p>
+
+      <!-- When the CV is finished: save it into the My CVs folder -->
+      <div class="finish-box">
+        <h2>Finished your CV?</h2>
+        <p>Save it to your My CVs folder. You can open it again later to edit or download it.</p>
+        <button type="button" class="submit-btn" data-save>Save CV to My CVs <span class="arrow">&rarr;</span></button>
+      </div>
+    </div>
+
+    <!-- ================= RIGHT SIDE: live CV ================= -->
+    <div class="preview">
+      <div class="preview-head">
+        <label for="template-select">Template</label>
+        <select id="template-select">
+          <option>Classic</option>
+          <option>Modern</option>
+          <option>Executive</option>
+          <option>Minimal</option>
+          <option>Creative</option>
+          <option>Elegant</option>
+          <option>Timeline</option>
+          <option>Swiss Grid</option>
+          <option>Sage Sidebar</option>
+          <option>Header Band</option>
+          <option>Mono Index</option>
+          <option>Noir Gold</option>
+          <option>Vertical Name</option>
+          <option>Bento Tiles</option>
+          <option>Orbit</option>
+          <option>Front Page</option>
+        </select>
+      </div>
+      <div class="preview-stage" id="preview-stage">
+        <div class="thumb-box cv-live" id="cv-box">
+          <div class="thumb" id="cv-page"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Small message that appears after saving -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span id="toast-text"></span>
+    <a href="mycvs.html">Open My CVs</a>
+  </div>
+
+</body>
+</html>
