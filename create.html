@@ -51,19 +51,19 @@
       <div class="fmt-bar" id="fmt-bar">
         <p class="fmt-target" id="fmt-target" aria-live="polite">Click in any box below, then choose a style.</p>
         <div class="rich-bar">
-          <select class="rich-select" data-rich-cmd="fontName" aria-label="Font">
-            <option value="">Font</option>
-            <option value="inherit">Template font</option>
+          <label class="fmt-label" for="fmt-font">Font</label>
+          <select class="rich-select" id="fmt-font" data-rich-cmd="fontName">
+            <option value="inherit" selected>Template font</option>
             <option value="Manrope">Manrope</option>
             <option value="Georgia">Georgia</option>
             <option value="Arial">Arial</option>
             <option value="Times New Roman">Times New Roman</option>
             <option value="Courier New">Typewriter</option>
           </select>
-          <select class="rich-select" data-rich-cmd="fontSize" aria-label="Text size">
-            <option value="">Size</option>
+          <label class="fmt-label" for="fmt-size">Size</label>
+          <select class="rich-select" id="fmt-size" data-rich-cmd="fontSize">
             <option value="2">Small</option>
-            <option value="3">Normal</option>
+            <option value="3" selected>Normal</option>
             <option value="4">Large</option>
             <option value="5">Extra large</option>
           </select>

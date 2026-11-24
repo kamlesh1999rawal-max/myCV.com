@@ -2127,6 +2127,17 @@ body.builder-page {
   border: none;
 }
 
+/* small "Font" and "Size" words in front of the two lists */
+.fmt-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.fmt-label + .rich-select {
+  min-width: 120px;
+}
+
 .fmt-target {
   font-size: 13px;
   line-height: 1.4;

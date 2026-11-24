@@ -1122,6 +1122,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     var lists = fmtBar.querySelectorAll(".rich-select");
     for (var k = 0; k < lists.length; k++) lists[k].disabled = !ready;
+
+    // Show the font and size of the box (or of the selected words)
+    var font = "inherit";
+    var size = "3";
+    if (ready && !isRich) {
+      if (st.font) font = st.font;
+      if (st.size) size = st.size;
+    } else if (isRich) {
+      font = currentRichFont();
+      size = currentRichSize();
+    }
+    document.getElementById("fmt-font").value = font;
+    document.getElementById("fmt-size").value = size;
+  }
+
+  // The font of the words at the cursor in a long box: one we offer, or the template font
+  function currentRichFont() {
+    var node = window.getSelection().anchorNode;
+    var element = node && (node.nodeType === 1 ? node : node.parentNode);
+    var font = element && element.closest ? element.closest("font[face]") : null;
+    if (font && activeBox.contains(font) && FONT_STACKS[font.getAttribute("face")]) return font.getAttribute("face");
+    return "inherit";
+  }
+
+  function currentRichSize() {
+    var node = window.getSelection().anchorNode;
+    var element = node && (node.nodeType === 1 ? node : node.parentNode);
+    var font = element && element.closest ? element.closest("font[size]") : null;
+    if (font && activeBox.contains(font) && /^[2-5]$/.test(font.getAttribute("size"))) return font.getAttribute("size");
+    return "3";
   }
 
   editor.addEventListener("focusin", function (event) {
@@ -1202,9 +1232,8 @@ document.addEventListener("DOMContentLoaded", function () {
   editor.addEventListener("change", function (event) {
     var list = event.target;
     var command = list.getAttribute && list.getAttribute("data-rich-cmd");
-    if (!command || list.value === "") return;
-    runRichCommand(command, list.value);
-    list.value = "";                           // back to "Font" / "Size"
+    if (!command) return;
+    runRichCommand(command, list.value);       // the list keeps showing the chosen name
   });
 
   editor.addEventListener("click", function (event) {
