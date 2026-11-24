@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
      ---------------------------------------------------------- */
   function sampleData() {
     return {
-      photo: "",
+      photo: "", styles: {},
       name: "Kamlesh Rawal",
       title: "Marketing Manager",
       email: "hello@mycv.com",
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function emptyData() {
     return {
-      photo: "",
+      photo: "", styles: {},
       name: "", title: "", email: "", phoneCode: "", phone: "",
       country: "", province: "", district: "", link: "",
       objective: "", objectiveRich: true, skills: "",
@@ -244,9 +244,50 @@ document.addEventListener("DOMContentLoaded", function () {
     return "<p>" + esc(text.trim()).replace(/\n/g, "<br>") + "</p>";
   }
 
-  function section(title, body) {
+  /* ----------------------------------------------------------
+     Styles for one-line boxes (name, email, job title, dates, ...).
+     The style applies to the whole box and is kept in data.styles
+     or, for an entry, in item.styles.
+     ---------------------------------------------------------- */
+  var FONT_STACKS = {
+    "Manrope": '"Manrope", Arial, sans-serif',
+    "Georgia": "Georgia, serif",
+    "Arial": "Arial, sans-serif",
+    "Times New Roman": '"Times New Roman", serif',
+    "Courier New": '"Courier New", monospace'
+  };
+  var SIZE_EM = { "2": "0.85em", "4": "1.25em", "5": "1.5em" };
+
+  function styleCss(st) {
+    if (!st) return "";
+    var css = "";
+    if (st.font && FONT_STACKS[st.font]) css += "font-family:" + FONT_STACKS[st.font] + ";";
+    if (SIZE_EM[st.size]) css += "font-size:" + SIZE_EM[st.size] + ";";
+    if (st.b) css += "font-weight:700;";
+    if (st.i) css += "font-style:italic;";
+    if (st.u) css += "text-decoration:underline;";
+    return css;
+  }
+
+  // Wraps a value in its style. <mark> is used so template rules for <span> don't touch it.
+  function wrapStyle(html, st) {
+    var css = styleCss(st);
+    return css ? "<mark class='st' style='" + css + "'>" + html + "</mark>" : html;
+  }
+
+  // A top-level value, like the name or email
+  function sv(key, text) {
+    return wrapStyle(esc(text), data.styles && data.styles[key]);
+  }
+
+  // A value of one entry, like a job title or a school
+  function iv(item, key, text) {
+    return wrapStyle(esc(text), item.styles && item.styles[key]);
+  }
+
+  function section(title, body, titleHtml) {
     if (!body) return "";
-    return '<div class="c-h">' + esc(title) + "</div>" + body;
+    return '<div class="c-h">' + (titleHtml || esc(title)) + "</div>" + body;
   }
 
   // Turns a list of entries (education, jobs, ...) into CV text
@@ -271,14 +312,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Place: the school or company, then city and country if they are filled in,
-      // then the company link
-      var place = [item.place, item.city, item.country].filter(Boolean).join(", ");
-      if (item.link) place = [place, item.link].filter(Boolean).join(" \u00b7 ");
+      // then the company link. Each part keeps its own style.
+      var placeBits = [];
+      if (item.place) placeBits.push(iv(item, "place", item.place));
+      if (item.city) placeBits.push(iv(item, "city", item.city));
+      if (item.country) placeBits.push(iv(item, "country", item.country));
+      var place = placeBits.join(", ");
+      if (item.link) place = place ? place + " \u00b7 " + iv(item, "link", item.link) : iv(item, "link", item.link);
 
       var hasDetails = item.rich ? hasText(item.details) : !!item.details;
       if (!item.title && !place && !years && !hasDetails) continue;
-      var one = '<div class="c-item"><b>' + esc(item.title) + "</b><span>" + esc(years) + "</span></div>";
-      if (place) one += '<p class="c-place">' + esc(place) + "</p>";
+      var one = '<div class="c-item"><b>' + iv(item, "title", item.title) + "</b><span>" +
+                (years ? iv(item, "dates", years) : "") + "</span></div>";
+      if (place) one += '<p class="c-place">' + place + "</p>";
       if (item.rich) {
         // text written with the font / bold / bullet buttons
         if (hasText(item.details)) one += '<div class="c-rich">' + cleanHtml(item.details) + "</div>";
@@ -306,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var parts = data.skills.split(",");
     var clean = [];
     for (var i = 0; i < parts.length; i++) {
-      if (parts[i].trim() !== "") clean.push(esc(parts[i].trim()));
+      if (parts[i].trim() !== "") clean.push(sv("skills", parts[i].trim()));
     }
     return clean;
   }
@@ -331,20 +377,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     var head =
-      '<div class="c-name">' + esc(data.name || "Your Name") + "</div>" +
-      (data.title ? '<div class="c-role">' + esc(data.title) + "</div>" : "");
+      '<div class="c-name">' + sv("name", data.name || "Your Name") + "</div>" +
+      (data.title ? '<div class="c-role">' + sv("title", data.title) + "</div>" : "");
 
     var contactParts = [];
-    if (data.email) contactParts.push(esc(data.email));
-    if (data.phone) contactParts.push(esc((data.phoneCode + " " + data.phone).trim()));
+    if (data.email) contactParts.push(sv("email", data.email));
+    if (data.phone) contactParts.push(sv("phone", (data.phoneCode + " " + data.phone).trim()));
 
     // District, Province, Country become one address line
-    var place = [];
-    if (data.district) place.push(data.district.trim());
-    if (data.province) place.push(data.province.trim());
-    if (data.country) place.push(data.country.trim());
-    if (place.length) contactParts.push(esc(place.join(", ")));
-    if (data.link) contactParts.push(esc(data.link));
+    var place = addressHtml();
+    if (place) contactParts.push(place);
+    if (data.link) contactParts.push(sv("link", data.link));
 
     var contactLine = contactParts.length
       ? '<div class="c-contact">' + contactParts.join(" &middot; ") + "</div>" : "";
@@ -366,7 +409,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < data.custom.length; i++) {
       var extra = data.custom[i];
       if (!extra.title && !detailsHtml(extra)) continue;
-      custom += section(extra.title || "New Section", detailsHtml(extra) || "<p></p>");
+      custom += section(extra.title || "New Section", detailsHtml(extra) || "<p></p>",
+                        iv(extra, "title", extra.title || "New Section"));
     }
 
     // The profile photo. Without one, the side-panel templates show the initials.
@@ -423,33 +467,43 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   // A section with its own box, so each template can style it
-  function box(key, title, body) {
+  function box(key, title, body, titleHtml) {
     if (!body) return "";
     return '<section class="c-sec c-sec-' + key + '">' +
-             '<div class="c-h">' + esc(title) + "</div>" +
+             '<div class="c-h">' + (titleHtml || esc(title)) + "</div>" +
              '<div class="c-sec-body">' + body + "</div>" +
            "</section>";
   }
 
-  function buildNewCV(templateName) {
-    var name = '<div class="c-name">' + esc(data.name || "Your Name") + "</div>";
-    var role = data.title ? '<div class="c-role">' + esc(data.title) + "</div>" : "";
+  // District, Province, Country as one line, each part in its own style
+  function addressHtml() {
+    var parts = [];
+    if (data.district) parts.push(sv("district", data.district.trim()));
+    if (data.province) parts.push(sv("province", data.province.trim()));
+    if (data.country) parts.push(sv("country", data.country.trim()));
+    return parts.join(", ");
+  }
 
-    // Contact details, each with a label (the Sage Sidebar shows the labels)
+  function buildNewCV(templateName) {
+    var name = '<div class="c-name">' + sv("name", data.name || "Your Name") + "</div>";
+    var role = data.title ? '<div class="c-role">' + sv("title", data.title) + "</div>" : "";
+
+    // Contact details, each with a label (the Sage Sidebar shows the labels).
+    // The values are ready to print, with their styles.
     var contact = [];
-    if (data.phone) contact.push(["Phone", (data.phoneCode + " " + data.phone).trim()]);
-    if (data.email) contact.push(["Email", data.email]);
-    var place = [data.district, data.province, data.country].filter(Boolean).join(", ");
+    if (data.phone) contact.push(["Phone", sv("phone", (data.phoneCode + " " + data.phone).trim())]);
+    if (data.email) contact.push(["Email", sv("email", data.email)]);
+    var place = addressHtml();
     if (place) contact.push(["Location", place]);
-    if (data.link) contact.push(["Website", data.link]);
+    if (data.link) contact.push(["Website", sv("link", data.link)]);
 
     var contactRows = "";
     var contactLabelled = "";
     var contactInline = [];
     for (var c = 0; c < contact.length; c++) {
-      contactRows += "<div>" + esc(contact[c][1]) + "</div>";
-      contactLabelled += '<div><div class="x-label">' + contact[c][0] + "</div><div>" + esc(contact[c][1]) + "</div></div>";
-      contactInline.push(esc(contact[c][1]));
+      contactRows += "<div>" + contact[c][1] + "</div>";
+      contactLabelled += '<div><div class="x-label">' + contact[c][0] + "</div><div>" + contact[c][1] + "</div></div>";
+      contactInline.push(contact[c][1]);
     }
 
     var skills = skillList();
@@ -469,7 +523,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < data.custom.length; i++) {
       var extra = data.custom[i];
       if (!extra.title && !detailsHtml(extra)) continue;
-      custom += box("custom", extra.title || "New Section", detailsHtml(extra) || "<p></p>");
+      custom += box("custom", extra.title || "New Section", detailsHtml(extra) || "<p></p>",
+                    iv(extra, "title", extra.title || "New Section"));
     }
 
     var hasPhoto = data.photo !== "";
@@ -483,14 +538,16 @@ document.addEventListener("DOMContentLoaded", function () {
       var mono = esc(initials()).split("").join("<i></i>");
 
       var addressLines = "";
-      if (data.district) addressLines += "<div>" + esc(data.district) + "</div>";
-      var region = [data.province, data.country].filter(Boolean).join(", ");
-      if (region) addressLines += "<div>" + esc(region) + "</div>";
+      if (data.district) addressLines += "<div>" + sv("district", data.district) + "</div>";
+      var regionBits = [];
+      if (data.province) regionBits.push(sv("province", data.province));
+      if (data.country) regionBits.push(sv("country", data.country));
+      if (regionBits.length) addressLines += "<div>" + regionBits.join(", ") + "</div>";
 
       var contactLines = "";
-      if (data.phone) contactLines += "<div>T: " + esc((data.phoneCode + " " + data.phone).trim()) + "</div>";
-      if (data.email) contactLines += "<div>E: " + esc(data.email) + "</div>";
-      if (data.link) contactLines += "<div>W: " + esc(data.link) + "</div>";
+      if (data.phone) contactLines += "<div>T: " + sv("phone", (data.phoneCode + " " + data.phone).trim()) + "</div>";
+      if (data.email) contactLines += "<div>E: " + sv("email", data.email) + "</div>";
+      if (data.link) contactLines += "<div>W: " + sv("link", data.link) + "</div>";
 
       var sideBox =
         (addressLines ? '<div class="x-ci"><b>Address</b>' + addressLines + "</div>" : "") +
@@ -633,11 +690,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // the bar under the name: job title, then contact details without the location
       var barRows = "";
       for (var b = 0; b < contact.length; b++) {
-        if (contact[b][0] !== "Location") barRows += "<div>" + esc(contact[b][1]) + "</div>";
+        if (contact[b][0] !== "Location") barRows += "<div>" + contact[b][1] + "</div>";
       }
       var intro = objectiveHtml();
       return (
-        '<div class="x-masthead"><div>Curriculum Vitae</div><div>' + esc(place) + "</div>" +
+        '<div class="x-masthead"><div>Curriculum Vitae</div><div>' + place + "</div>" +
           "<div>Edition " + new Date().getFullYear() + "</div></div>" +
         name +
         '<div class="x-bar">' + role + barRows + "</div>" +
@@ -755,6 +812,8 @@ document.addEventListener("DOMContentLoaded", function () {
       html += "</div>";
     }
     holder.innerHTML = html;
+    paintBoxes();
+    updateBar();               // the box being styled may have been replaced
   }
 
   // One label + one box
@@ -773,24 +832,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var FONT_NAMES = ["Default", "Georgia", "Arial", "Times New Roman", "Typewriter"];
 
   function richField(id, label, listName, index, key, value) {
-    var fontOptions = '<option value="">Font</option>';
-    for (var f = 0; f < FONTS.length; f++) {
-      fontOptions += '<option value="' + FONTS[f] + '">' + FONT_NAMES[f] + "</option>";
-    }
     return '<div class="field">' +
       '<span class="field-label" id="' + id + '-label">' + label + "</span>" +
       '<div class="rich">' +
-        '<div class="rich-bar" data-for="' + id + '">' +
-          '<select class="rich-select" data-rich-cmd="fontName" aria-label="Font">' + fontOptions + "</select>" +
-          '<select class="rich-select" data-rich-cmd="fontSize" aria-label="Text size">' +
-            '<option value="">Size</option><option value="2">Small</option><option value="3">Normal</option><option value="4">Large</option>' +
-          "</select>" +
-          '<button type="button" class="rich-btn" data-cmd="bold" aria-label="Bold"><b>B</b></button>' +
-          '<button type="button" class="rich-btn" data-cmd="italic" aria-label="Italic"><i>I</i></button>' +
-          '<button type="button" class="rich-btn" data-cmd="underline" aria-label="Underline"><u>U</u></button>' +
-          '<button type="button" class="rich-btn rich-btn-wide" data-cmd="bulletList">&bull; Bullets</button>' +
-          '<button type="button" class="rich-btn rich-btn-wide" data-cmd="arrowList">&#10148; Arrows</button>' +
-        "</div>" +
         '<div class="rich-box" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="' + id + '-label" ' +
           'id="' + id + '" data-rich="yes" data-list="' + listName + '" data-index="' + index + '" data-key="' + key + '">' +
           cleanHtml(value) +
@@ -835,7 +879,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (arrows) node.setAttribute("class", "arrows");     // a list with arrows
       if (tag === "FONT") {
         if (face && FONTS.indexOf(face) !== -1) node.setAttribute("face", face);
-        if (size === "2" || size === "3" || size === "4") node.setAttribute("size", size);
+        if (size === "2" || size === "3" || size === "4" || size === "5") node.setAttribute("size", size);
       }
     }
   }
@@ -891,6 +935,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderEverything() {
     showPhotoInForm();
     fillSimpleFields();
+    paintBoxes();
     for (var listName in LISTS) renderList(listName);
     renderCV();
   }
@@ -975,10 +1020,156 @@ document.addEventListener("DOMContentLoaded", function () {
     if (made && wantArrows) made.classList.add("arrows");
   }
 
-  // Runs one toolbar command (bold, bullets, font, ...) on the box it belongs to
-  function runRichCommand(bar, command, value) {
-    var box = document.getElementById(bar.getAttribute("data-for"));
-    if (!box) return;
+  /* ----------------------------------------------------------
+     The style toolbar at the top of the form. It works on the box
+     the person last clicked in:
+     - a long box (Career Objective, What you did, ...): the selected
+       words change, and lists with dots or arrows can be made
+     - a one-line box (name, email, dates, ...): the whole box changes
+     ---------------------------------------------------------- */
+  var fmtBar = document.getElementById("fmt-bar");
+  var fmtTarget = document.getElementById("fmt-target");
+  var activeBox = null;
+  var DATE_KEYS = ["years", "start", "end", "startMonth", "startYear", "endMonth", "endYear"];
+
+  // Where the style of a one-line box is kept: { holder, key }
+  function styleSlot(el, create) {
+    var field = el.getAttribute("data-field");
+    if (field) {
+      if (field === "phoneCode") field = "phone";
+      if (!data.styles) {
+        if (!create) return null;
+        data.styles = {};
+      }
+      return { holder: data.styles, key: field };
+    }
+    var listName = el.getAttribute("data-list");
+    if (!listName || !data[listName]) return null;
+    var item = data[listName][Number(el.getAttribute("data-index"))];
+    if (!item) return null;
+    var key = el.getAttribute("data-key");
+    if (DATE_KEYS.indexOf(key) !== -1) key = "dates";      // all date boxes share one style
+    if (!item.styles) {
+      if (!create) return null;
+      item.styles = {};
+    }
+    return { holder: item.styles, key: key };
+  }
+
+  function styleOf(el) {
+    var slot = styleSlot(el, false);
+    return slot ? slot.holder[slot.key] : null;
+  }
+
+  // Shows a one-line box in its chosen style
+  function paintBox(el) {
+    var st = styleOf(el) || {};
+    el.style.fontFamily = st.font && FONT_STACKS[st.font] ? FONT_STACKS[st.font] : "";
+    el.style.fontSize = SIZE_EM[st.size] || "";
+    el.style.fontWeight = st.b ? "700" : "";
+    el.style.fontStyle = st.i ? "italic" : "";
+    el.style.textDecoration = st.u ? "underline" : "";
+  }
+
+  function paintBoxes() {
+    var boxes = editor.querySelectorAll(
+      "input[data-field], input[data-list], select[data-field], select[data-list]");
+    for (var i = 0; i < boxes.length; i++) paintBox(boxes[i]);
+  }
+
+  function isStylable(el) {
+    if (!el || !el.matches) return false;
+    if (el.closest("#fmt-bar")) return false;
+    return el.matches(".rich-box, input[data-field], input[data-list], select[data-field], select[data-list]");
+  }
+
+  function boxLabel(el) {
+    var label = el.id ? editor.querySelector('label[for="' + el.id + '"]') : null;
+    if (!label && el.id) label = document.getElementById(el.id + "-label");
+    if (label) return label.textContent.trim();
+    return el.getAttribute("aria-label") || "this box";
+  }
+
+  // Updates the toolbar: which box it works on, and which buttons are on
+  function updateBar() {
+    var ready = activeBox && document.contains(activeBox);
+    var isRich = ready && activeBox.classList.contains("rich-box");
+    if (!ready) {
+      activeBox = null;
+      fmtTarget.textContent = "Click in any box below, then choose a style.";
+    } else if (isRich) {
+      fmtTarget.innerHTML = "Styling <b></b>: select words first, then choose a style.";
+      fmtTarget.querySelector("b").textContent = boxLabel(activeBox);
+    } else {
+      fmtTarget.innerHTML = "Styling <b></b>: the whole box changes.";
+      fmtTarget.querySelector("b").textContent = boxLabel(activeBox);
+    }
+
+    var st = ready && !isRich ? (styleOf(activeBox) || {}) : {};
+    var buttons = fmtBar.querySelectorAll(".rich-btn");
+    for (var i = 0; i < buttons.length; i++) {
+      var cmd = buttons[i].getAttribute("data-cmd");
+      var isList = cmd === "bulletList" || cmd === "arrowList";
+      buttons[i].disabled = !ready || (isList && !isRich);
+      var on = false;
+      if (ready && !isRich) {
+        on = (cmd === "bold" && st.b) || (cmd === "italic" && st.i) || (cmd === "underline" && st.u);
+      } else if (isRich && !isList) {
+        try { on = document.queryCommandState(cmd); } catch (error) { on = false; }
+      }
+      buttons[i].classList.toggle("is-on", !!on);
+      buttons[i].setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    var lists = fmtBar.querySelectorAll(".rich-select");
+    for (var k = 0; k < lists.length; k++) lists[k].disabled = !ready;
+  }
+
+  editor.addEventListener("focusin", function (event) {
+    if (isStylable(event.target)) {
+      activeBox = event.target;
+      updateBar();
+    }
+  });
+
+  document.addEventListener("selectionchange", function () {
+    if (activeBox && activeBox.classList.contains("rich-box") && document.activeElement === activeBox) updateBar();
+  });
+
+  // Changes the style of a whole one-line box
+  function styleWholeBox(el, command, value) {
+    var slot = styleSlot(el, true);
+    if (!slot) return;
+    var st = slot.holder[slot.key] || {};
+    if (command === "bold") st.b = !st.b;
+    else if (command === "italic") st.i = !st.i;
+    else if (command === "underline") st.u = !st.u;
+    else if (command === "fontName") {
+      if (FONT_STACKS[value]) st.font = value; else delete st.font;
+    } else if (command === "fontSize") {
+      if (SIZE_EM[value]) st.size = value; else delete st.size;
+    } else return;
+
+    ["b", "i", "u"].forEach(function (k) { if (!st[k]) delete st[k]; });
+    if (Object.keys(st).length) slot.holder[slot.key] = st;
+    else delete slot.holder[slot.key];
+
+    paintBoxes();
+    saveData();
+    renderCV();
+  }
+
+  // Runs one toolbar command on the active box
+  function runRichCommand(command, value) {
+    var box = activeBox;
+    if (!box || !document.contains(box)) return;
+
+    if (!box.classList.contains("rich-box")) {
+      styleWholeBox(box, command, value);
+      box.focus();
+      updateBar();
+      return;
+    }
+
     box.focus();
     if (savedRange && box.contains(savedRange.commonAncestorContainer)) {
       var selection = window.getSelection();
@@ -1004,6 +1195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     saveData();
     renderCV();
+    updateBar();
   }
 
   // Font and size lists
@@ -1011,7 +1203,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var list = event.target;
     var command = list.getAttribute && list.getAttribute("data-rich-cmd");
     if (!command || list.value === "") return;
-    runRichCommand(list.closest(".rich-bar"), command, list.value);
+    runRichCommand(command, list.value);
     list.value = "";                           // back to "Font" / "Size"
   });
 
@@ -1019,9 +1211,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var button = event.target.closest("button");
     if (!button) return;
 
-    // B / I / U / Bullets buttons
+    // B / I / U / Bullets / Arrows buttons
     if (button.getAttribute("data-cmd")) {
-      runRichCommand(button.closest(".rich-bar"), button.getAttribute("data-cmd"));
+      runRichCommand(button.getAttribute("data-cmd"));
       return;
     }
 
@@ -1163,6 +1355,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start
   renderEverything();
+  updateBar();
   fitCV();
 
   // Opened with the Download button on the My CVs page (create.html#download):

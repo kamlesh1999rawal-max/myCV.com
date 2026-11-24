@@ -1117,6 +1117,14 @@ button:focus-visible {
 .c-rich font[size="2"] { font-size: 0.85em; }
 .c-rich font[size="3"] { font-size: 1em; }
 .c-rich font[size="4"] { font-size: 1.25em; }
+.c-rich font[size="5"] { font-size: 1.5em; }
+
+/* a value with its own style (name, email, dates, ...) */
+mark.st {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
 
 .c-side .c-rich { color: inherit; }
 
@@ -2098,7 +2106,55 @@ body.builder-page {
   border-bottom: 1px solid var(--line);
 }
 
-.field .rich-select {
+/* ---------- The style toolbar at the top of the form ---------- */
+.fmt-bar {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px 12px;
+  background: var(--bg);
+  border: 1.5px solid var(--gold);
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(20, 26, 38, 0.1);
+}
+
+.fmt-bar .rich-bar {
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.fmt-target {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+.fmt-target b {
+  color: var(--gold);
+}
+
+.rich-btn.is-on {
+  background: var(--text);
+  border-color: var(--text);
+  color: #ffffff;
+}
+
+.rich-btn:disabled,
+.rich-select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.rich-btn:disabled:hover {
+  border-color: var(--line);
+  background: var(--bg);
+}
+
+.rich-select {
   width: auto;
   font-size: 13px;
   font-weight: 600;
@@ -2150,6 +2206,7 @@ body.builder-page {
 .rich-box font[size="2"] { font-size: 0.85em; }
 .rich-box font[size="3"] { font-size: 1em; }
 .rich-box font[size="4"] { font-size: 1.25em; }
+.rich-box font[size="5"] { font-size: 1.5em; }
 
 /* small heading inside an entry, like "Address" */
 .entry-sub {

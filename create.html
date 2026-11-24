@@ -47,6 +47,34 @@
         </div>
       </div>
 
+      <!-- Style toolbar: works on whichever box was clicked last -->
+      <div class="fmt-bar" id="fmt-bar">
+        <p class="fmt-target" id="fmt-target" aria-live="polite">Click in any box below, then choose a style.</p>
+        <div class="rich-bar">
+          <select class="rich-select" data-rich-cmd="fontName" aria-label="Font">
+            <option value="">Font</option>
+            <option value="inherit">Template font</option>
+            <option value="Manrope">Manrope</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Typewriter</option>
+          </select>
+          <select class="rich-select" data-rich-cmd="fontSize" aria-label="Text size">
+            <option value="">Size</option>
+            <option value="2">Small</option>
+            <option value="3">Normal</option>
+            <option value="4">Large</option>
+            <option value="5">Extra large</option>
+          </select>
+          <button type="button" class="rich-btn" data-cmd="bold" aria-label="Bold"><b>B</b></button>
+          <button type="button" class="rich-btn" data-cmd="italic" aria-label="Italic"><i>I</i></button>
+          <button type="button" class="rich-btn" data-cmd="underline" aria-label="Underline"><u>U</u></button>
+          <button type="button" class="rich-btn rich-btn-wide" data-cmd="bulletList">&bull; Bullets</button>
+          <button type="button" class="rich-btn rich-btn-wide" data-cmd="arrowList">&#10148; Arrows</button>
+        </div>
+      </div>
+
       <!-- 1. Personal details -->
       <details class="ed-section" open>
         <summary><span class="ed-num">1</span>Personal Details</summary>
@@ -154,27 +182,6 @@
           <div class="field">
             <span class="field-label" id="p-objective-label">Write 2 or 3 sentences about your goal</span>
             <div class="rich">
-              <div class="rich-bar" data-for="p-objective">
-                <select class="rich-select" data-rich-cmd="fontName" aria-label="Font">
-                  <option value="">Font</option>
-                  <option value="Manrope">Default</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Arial">Arial</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Courier New">Typewriter</option>
-                </select>
-                <select class="rich-select" data-rich-cmd="fontSize" aria-label="Text size">
-                  <option value="">Size</option>
-                  <option value="2">Small</option>
-                  <option value="3">Normal</option>
-                  <option value="4">Large</option>
-                </select>
-                <button type="button" class="rich-btn" data-cmd="bold" aria-label="Bold"><b>B</b></button>
-                <button type="button" class="rich-btn" data-cmd="italic" aria-label="Italic"><i>I</i></button>
-                <button type="button" class="rich-btn" data-cmd="underline" aria-label="Underline"><u>U</u></button>
-                <button type="button" class="rich-btn rich-btn-wide" data-cmd="bulletList">&bull; Bullets</button>
-                <button type="button" class="rich-btn rich-btn-wide" data-cmd="arrowList">&#10148; Arrows</button>
-              </div>
               <div class="rich-box" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="p-objective-label"
                 id="p-objective" data-field="objective" data-rich="yes"></div>
             </div>
