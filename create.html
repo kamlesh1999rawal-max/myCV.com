@@ -152,8 +152,32 @@
         <summary><span class="ed-num">2</span>Career Objective</summary>
         <div class="ed-body">
           <div class="field">
-            <label for="p-objective">Write 2 or 3 sentences about your goal</label>
-            <textarea id="p-objective" data-field="objective" rows="4" placeholder="What kind of job are you looking for, and what do you bring?"></textarea>
+            <span class="field-label" id="p-objective-label">Write 2 or 3 sentences about your goal</span>
+            <div class="rich">
+              <div class="rich-bar" data-for="p-objective">
+                <select class="rich-select" data-rich-cmd="fontName" aria-label="Font">
+                  <option value="">Font</option>
+                  <option value="Manrope">Default</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Courier New">Typewriter</option>
+                </select>
+                <select class="rich-select" data-rich-cmd="fontSize" aria-label="Text size">
+                  <option value="">Size</option>
+                  <option value="2">Small</option>
+                  <option value="3">Normal</option>
+                  <option value="4">Large</option>
+                </select>
+                <button type="button" class="rich-btn" data-cmd="bold" aria-label="Bold"><b>B</b></button>
+                <button type="button" class="rich-btn" data-cmd="italic" aria-label="Italic"><i>I</i></button>
+                <button type="button" class="rich-btn" data-cmd="underline" aria-label="Underline"><u>U</u></button>
+                <button type="button" class="rich-btn rich-btn-wide" data-cmd="bulletList">&bull; Bullets</button>
+                <button type="button" class="rich-btn rich-btn-wide" data-cmd="arrowList">&#10148; Arrows</button>
+              </div>
+              <div class="rich-box" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="p-objective-label"
+                id="p-objective" data-field="objective" data-rich="yes"></div>
+            </div>
           </div>
         </div>
       </details>

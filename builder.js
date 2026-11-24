@@ -21,12 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
     education: {
       name: "Education",
       title: "Degree or course", place: "School or university", years: null, details: "Details (optional)",
+      rich: true,
       // Education has an address and two year boxes instead of one "Years" box
       city: "City", country: "Country", start: "Start year", end: "End year"
     },
     experience: {
       name: "Job",
       title: "Job title", place: "Company", years: null, details: "What you did",
+      rich: true,
       // Work experience has a company link and dates with month + year
       link: "Company link (optional)",
       startMonth: "Start month", startYear: "Start year", endMonth: "End month", endYear: "End year"
@@ -46,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     custom: {
       name: "Your section",
-      title: "Section title", place: null, years: null, details: "What to write in this section"
+      title: "Section title", place: null, years: null, details: "What to write in this section",
+      rich: true
     }
   };
 
@@ -66,13 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
       district: "City",
       link: "",
       objective: "Marketing manager with 6 years of experience, looking to lead brand growth at a global company.",
+      objectiveRich: true,
       skills: "Branding, SEO, Content, Analytics",
       education: [
-        { title: "BBA, Marketing", place: "City University", city: "", country: "", start: "2015", end: "2019", details: "" }
+        { rich: true, title: "BBA, Marketing", place: "City University", city: "", country: "", start: "2015", end: "2019", details: "" }
       ],
       experience: [
-        { title: "Marketing Manager", place: "Bright Media", link: "", startMonth: "Mar", startYear: "2022", endMonth: "Present", endYear: "", details: "Led a team of 5 and planned yearly campaigns." },
-        { title: "Marketing Executive", place: "Nova Retail", link: "", startMonth: "Jun", startYear: "2019", endMonth: "Feb", endYear: "2022", details: "Managed social media and email marketing." }
+        { rich: true, title: "Marketing Manager", place: "Bright Media", link: "", startMonth: "Mar", startYear: "2022", endMonth: "Present", endYear: "", details: "Led a team of 5 and planned yearly campaigns." },
+        { rich: true, title: "Marketing Executive", place: "Nova Retail", link: "", startMonth: "Jun", startYear: "2019", endMonth: "Feb", endYear: "2022", details: "Managed social media and email marketing." }
       ],
       projects: [
         { title: "Brand Relaunch", place: "Project lead", link: "", startMonth: "Jan", startYear: "2023", endMonth: "Aug", endYear: "2023",
@@ -90,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       photo: "",
       name: "", title: "", email: "", phoneCode: "", phone: "",
       country: "", province: "", district: "", link: "",
-      objective: "", skills: "",
+      objective: "", objectiveRich: true, skills: "",
       education: [], experience: [], projects: [], certifications: [], custom: []
     };
   }
@@ -163,6 +167,21 @@ document.addEventListener("DOMContentLoaded", function () {
             project.rich = true;
           }
         }
+        // Older versions kept Career Objective and the details of
+        // education, jobs and own sections as plain text.
+        if (!saved.objectiveRich) {
+          base.objective = esc(base.objective).replace(/\n/g, "<br>");
+          base.objectiveRich = true;
+        }
+        ["education", "experience", "custom"].forEach(function (listName) {
+          for (var r = 0; r < base[listName].length; r++) {
+            var item = base[listName][r];
+            if (!item.rich) {
+              item.details = esc(item.details).replace(/\n/g, "<br>");
+              item.rich = true;
+            }
+          }
+        });
         // An older version had one "City and country" box. Keep that text.
         if (saved.location && !base.country && !base.province && !base.district) {
           base.district = saved.location;
@@ -272,6 +291,17 @@ document.addEventListener("DOMContentLoaded", function () {
     return html;
   }
 
+  // Career Objective, with its fonts, bold, bullets and arrows
+  function objectiveHtml() {
+    return hasText(data.objective) ? '<div class="c-rich">' + cleanHtml(data.objective) + "</div>" : "";
+  }
+
+  // The text of one entry or own section: formatted, or plain from an old CV
+  function detailsHtml(item) {
+    if (item.rich) return hasText(item.details) ? '<div class="c-rich">' + cleanHtml(item.details) + "</div>" : "";
+    return paragraph(item.details);
+  }
+
   function skillList() {
     var parts = data.skills.split(",");
     var clean = [];
@@ -325,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var skillsLine = skills.length ? section("Skills", "<p>" + skills.join(" &middot; ") + "</p>") : "";
     var skillsSide = skills.length ? section("Skills", "<p>" + skills.join("<br>") + "</p>") : "";
 
-    var objective = section("Career Objective", paragraph(data.objective));
+    var objective = section("Career Objective", objectiveHtml());
     var education = section("Education", entries(data.education));
     var experience = section("Work Experience", entries(data.experience));
     var projects = section("Projects", entries(data.projects));
@@ -335,8 +365,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var custom = "";
     for (var i = 0; i < data.custom.length; i++) {
       var extra = data.custom[i];
-      if (!extra.title && !extra.details) continue;
-      custom += section(extra.title || "New Section", paragraph(extra.details) || "<p></p>");
+      if (!extra.title && !detailsHtml(extra)) continue;
+      custom += section(extra.title || "New Section", detailsHtml(extra) || "<p></p>");
     }
 
     // The profile photo. Without one, the side-panel templates show the initials.
@@ -429,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var skillsRows = skills.length
       ? box("skills", "Skills", '<div class="c-skill-list"><div>' + skills.join("</div><div>") + "</div></div>") : "";
 
-    var objective = box("objective", "Career Objective", paragraph(data.objective));
+    var objective = box("objective", "Career Objective", objectiveHtml());
     var education = box("education", "Education", entries(data.education, true));
     var experience = box("exp", "Work Experience", entries(data.experience, true));
     var projects = box("projects", "Projects", entries(data.projects, true));
@@ -438,8 +468,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var custom = "";
     for (var i = 0; i < data.custom.length; i++) {
       var extra = data.custom[i];
-      if (!extra.title && !extra.details) continue;
-      custom += box("custom", extra.title || "New Section", paragraph(extra.details) || "<p></p>");
+      if (!extra.title && !detailsHtml(extra)) continue;
+      custom += box("custom", extra.title || "New Section", detailsHtml(extra) || "<p></p>");
     }
 
     var hasPhoto = data.photo !== "";
@@ -466,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
         (addressLines ? '<div class="x-ci"><b>Address</b>' + addressLines + "</div>" : "") +
         (contactLines ? '<div class="x-ci"><b>Contact</b>' + contactLines + "</div>" : "");
 
-      var profileText = paragraph(data.objective);
+      var profileText = objectiveHtml();
 
       return (
         '<div class="x-topbar"></div>' +
@@ -605,7 +635,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (var b = 0; b < contact.length; b++) {
         if (contact[b][0] !== "Location") barRows += "<div>" + esc(contact[b][1]) + "</div>";
       }
-      var intro = paragraph(data.objective);
+      var intro = objectiveHtml();
       return (
         '<div class="x-masthead"><div>Curriculum Vitae</div><div>' + esc(place) + "</div>" +
           "<div>Edition " + new Date().getFullYear() + "</div></div>" +
@@ -758,7 +788,8 @@ document.addEventListener("DOMContentLoaded", function () {
           '<button type="button" class="rich-btn" data-cmd="bold" aria-label="Bold"><b>B</b></button>' +
           '<button type="button" class="rich-btn" data-cmd="italic" aria-label="Italic"><i>I</i></button>' +
           '<button type="button" class="rich-btn" data-cmd="underline" aria-label="Underline"><u>U</u></button>' +
-          '<button type="button" class="rich-btn rich-btn-wide" data-cmd="insertUnorderedList">&bull; Bullets</button>' +
+          '<button type="button" class="rich-btn rich-btn-wide" data-cmd="bulletList">&bull; Bullets</button>' +
+          '<button type="button" class="rich-btn rich-btn-wide" data-cmd="arrowList">&#10148; Arrows</button>' +
         "</div>" +
         '<div class="rich-box" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="' + id + '-label" ' +
           'id="' + id + '" data-rich="yes" data-list="' + listName + '" data-index="' + index + '" data-key="' + key + '">' +
@@ -799,7 +830,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // remove every attribute, except a font name or size we offer
       var face = node.getAttribute("face");
       var size = node.getAttribute("size");
+      var arrows = tag === "UL" && node.classList.contains("arrows");
       while (node.attributes.length) node.removeAttribute(node.attributes[0].name);
+      if (arrows) node.setAttribute("class", "arrows");     // a list with arrows
       if (tag === "FONT") {
         if (face && FONTS.indexOf(face) !== -1) node.setAttribute("face", face);
         if (size === "2" || size === "3" || size === "4") node.setAttribute("size", size);
@@ -835,7 +868,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function fillSimpleFields() {
     var boxes = editor.querySelectorAll("[data-field]");
     for (var i = 0; i < boxes.length; i++) {
-      boxes[i].value = data[boxes[i].getAttribute("data-field")] || "";
+      var value = data[boxes[i].getAttribute("data-field")] || "";
+      if (boxes[i].hasAttribute("data-rich")) {
+        boxes[i].innerHTML = cleanHtml(value);        // a box with the toolbar
+      } else {
+        boxes[i].value = value;
+      }
     }
   }
 
@@ -870,7 +908,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var isRich = box.hasAttribute("data-rich");
 
     if (fieldName) {
-      data[fieldName] = box.value;
+      data[fieldName] = isRich ? cleanHtml(box.innerHTML) : box.value;
       if (fieldName === "name" && !data.photo) showPhotoInForm();   // update the initials
     } else if (listName) {
       var index = Number(box.getAttribute("data-index"));
@@ -902,6 +940,41 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.target.closest(".rich-btn")) event.preventDefault();
   });
 
+  // The list the cursor is in, inside this box
+  function listAtCursor(box) {
+    var selection = window.getSelection();
+    if (!selection.rangeCount) return null;
+    var node = selection.anchorNode;
+    var element = node && (node.nodeType === 1 ? node : node.parentNode);
+    var list = element && element.closest ? element.closest("ul") : null;
+    return list && box.contains(list) ? list : null;
+  }
+
+  // Bullets and Arrows: the same button again removes the list,
+  // the other button switches between dots and arrows
+  function toggleList(box, wantArrows) {
+    var list = listAtCursor(box);
+    if (list) {
+      if (list.classList.contains("arrows") === wantArrows) {
+        document.execCommand("insertUnorderedList");          // remove the list
+      } else {
+        list.classList.toggle("arrows", wantArrows);
+      }
+      return;
+    }
+    var before = Array.prototype.slice.call(box.querySelectorAll("ul"));
+    document.execCommand("insertUnorderedList");
+    var made = listAtCursor(box);
+    if (!made) {
+      // in an empty box the cursor is not inside the new list yet: find it
+      var lists = box.querySelectorAll("ul");
+      for (var i = 0; i < lists.length; i++) {
+        if (before.indexOf(lists[i]) === -1) made = lists[i];
+      }
+    }
+    if (made && wantArrows) made.classList.add("arrows");
+  }
+
   // Runs one toolbar command (bold, bullets, font, ...) on the box it belongs to
   function runRichCommand(bar, command, value) {
     var box = document.getElementById(bar.getAttribute("data-for"));
@@ -914,12 +987,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     try {
       document.execCommand("styleWithCSS", false, false);
-      document.execCommand(command, false, value || null);
+      if (command === "bulletList" || command === "arrowList") {
+        toggleList(box, command === "arrowList");
+      } else {
+        document.execCommand(command, false, value || null);
+      }
     } catch (error) {
       // This browser does not support the command. The text stays as it is.
     }
-    var index = Number(box.getAttribute("data-index"));
-    data[box.getAttribute("data-list")][index][box.getAttribute("data-key")] = cleanHtml(box.innerHTML);
+    // Save the text: Career Objective, or one entry of a list
+    if (box.getAttribute("data-field")) {
+      data[box.getAttribute("data-field")] = cleanHtml(box.innerHTML);
+    } else {
+      var index = Number(box.getAttribute("data-index"));
+      data[box.getAttribute("data-list")][index][box.getAttribute("data-key")] = cleanHtml(box.innerHTML);
+    }
     saveData();
     renderCV();
   }
