@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function sampleData() {
     return {
       photo: "",
-      name: "Alex Morgan",
+      name: "Kamlesh Rawal",
       title: "Marketing Manager",
       email: "hello@mycv.com",
       phoneCode: "",
