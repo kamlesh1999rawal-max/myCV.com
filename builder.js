@@ -388,7 +388,8 @@ document.addEventListener("DOMContentLoaded", function () {
      ---------------------------------------------------------- */
   var NEW_TEMPLATES = [
     "Timeline", "Swiss Grid", "Sage Sidebar", "Header Band", "Mono Index",
-    "Noir Gold", "Vertical Name", "Bento Tiles", "Orbit", "Front Page"
+    "Noir Gold", "Vertical Name", "Bento Tiles", "Orbit", "Front Page",
+    "Sunbeam"
   ];
 
   // A section with its own box, so each template can style it
@@ -446,6 +447,43 @@ document.addEventListener("DOMContentLoaded", function () {
       ? '<div class="c-photo"><img src="' + esc(data.photo) + '" alt=""></div>'
       : '<div class="c-photo">' + esc(initials()) + "</div>";
     var photoIfAny = hasPhoto ? photo : "";
+
+    if (templateName === "Sunbeam") {
+      // initials in the yellow circle, like "A | M"
+      var mono = esc(initials()).split("").join("<i></i>");
+
+      var addressLines = "";
+      if (data.district) addressLines += "<div>" + esc(data.district) + "</div>";
+      var region = [data.province, data.country].filter(Boolean).join(", ");
+      if (region) addressLines += "<div>" + esc(region) + "</div>";
+
+      var contactLines = "";
+      if (data.phone) contactLines += "<div>T: " + esc((data.phoneCode + " " + data.phone).trim()) + "</div>";
+      if (data.email) contactLines += "<div>E: " + esc(data.email) + "</div>";
+      if (data.link) contactLines += "<div>W: " + esc(data.link) + "</div>";
+
+      var sideBox =
+        (addressLines ? '<div class="x-ci"><b>Address</b>' + addressLines + "</div>" : "") +
+        (contactLines ? '<div class="x-ci"><b>Contact</b>' + contactLines + "</div>" : "");
+
+      var profileText = paragraph(data.objective);
+
+      return (
+        '<div class="x-topbar"></div>' +
+        '<div class="x-head">' +
+          '<div class="x-head-main">' + name + role + '<div class="x-short"></div></div>' +
+          (mono ? '<div class="x-mono">' + mono + "</div>" : "") +
+        "</div>" +
+        '<div class="x-intro">' + photoIfAny +
+          '<div class="x-profile">' + (profileText ? '<div class="c-h">Profile</div>' + profileText : "") + "</div>" +
+          (sideBox ? '<div class="x-contactbox">' + sideBox + "</div>" : "") +
+        "</div>" +
+        '<div class="x-cols">' +
+          '<div class="x-col x-left">' + education + skillsRows + certifications + custom + "</div>" +
+          '<div class="x-col x-right">' + experience + projects + "</div>" +
+        "</div>"
+      );
+    }
 
     if (templateName === "Timeline") {
       return (

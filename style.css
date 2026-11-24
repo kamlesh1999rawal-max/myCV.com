@@ -1455,6 +1455,88 @@ button:focus-visible {
 .t-front-page .c-item { flex-direction: column; gap: 0; }
 .t-front-page .c-item span { color: var(--muted); }
 
+/* ---------- Sunbeam: yellow top bar, round photo, timeline down the middle ---------- */
+.t-sunbeam { --accent: #f5c540; --muted: #6b6b6b; color: #2b2b2b; font-family: "Lato", Arial, sans-serif; }
+.t-sunbeam .x-topbar { height: 12px; flex-shrink: 0; background: var(--accent); }
+.t-sunbeam .x-head { align-items: flex-start; padding: 30px 46px 0; }
+.t-sunbeam .c-name,
+.cv-live .thumb.t-sunbeam .c-name {
+  font-family: "Montserrat", Arial, sans-serif; font-weight: 800; font-size: 32px;
+  line-height: 1.08; letter-spacing: 0.4px; text-transform: uppercase; color: #1a1a1a;
+}
+.t-sunbeam .c-role {
+  margin-top: 5px; font-family: "Montserrat", Arial, sans-serif; font-weight: 500; font-size: 10.5px;
+  letter-spacing: 1.6px; text-transform: uppercase; color: #555555;
+}
+.t-sunbeam .x-short { width: 48px; height: 1px; margin-top: 22px; background: var(--accent); }
+/* the initials in a yellow circle, top right */
+.t-sunbeam .x-mono {
+  width: 46px; height: 46px; flex-shrink: 0; box-sizing: border-box; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: var(--accent); border: 1px solid #2b2b2b;
+  font-family: "Montserrat", Arial, sans-serif; font-weight: 500; font-size: 11px; color: #1a1a1a;
+}
+.t-sunbeam .x-mono i { width: 1px; height: 14px; background: #2b2b2b; }
+/* photo, profile text, then address and contact on a short line with dots */
+.t-sunbeam .x-intro { display: flex; align-items: flex-start; gap: 22px; padding: 22px 46px 0; }
+.t-sunbeam .x-intro .c-photo { width: 86px; height: 86px; }
+.t-sunbeam .x-profile { flex: 1; min-width: 0; }
+.t-sunbeam .x-profile .c-h {
+  margin: 0 0 6px; font-family: "Montserrat", Arial, sans-serif; font-weight: 700; font-size: 9.5px;
+  letter-spacing: 0; text-transform: none; color: #222222;
+}
+.t-sunbeam .x-profile p { font-size: 9.5px; line-height: 1.6; color: var(--muted); }
+.t-sunbeam .x-contactbox {
+  width: 140px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px;
+  padding-left: 14px; border-left: 1px solid #2b2b2b; font-size: 9.5px; line-height: 1.5; color: #444444;
+  overflow-wrap: anywhere;
+}
+.t-sunbeam .x-ci { position: relative; }
+.t-sunbeam .x-ci::before,
+.t-sunbeam .x-right .c-entry::before {
+  content: ""; position: absolute; top: 2px; width: 9px; height: 9px; box-sizing: border-box;
+  border-radius: 50%; background: var(--accent); border: 1px solid #2b2b2b;
+}
+.t-sunbeam .x-ci::before { left: -19px; }
+.t-sunbeam .x-ci b { display: block; margin-bottom: 2px; font-family: "Montserrat", Arial, sans-serif; font-weight: 700; color: #222222; }
+/* two columns with the dark line between them */
+.t-sunbeam .x-cols { gap: 0; padding: 34px 46px 40px; }
+.t-sunbeam .x-col { gap: 24px; }
+.t-sunbeam .x-left { flex: 0 0 156px; padding-right: 22px; }
+.t-sunbeam .x-right { flex: 1 1 0; padding-left: 22px; border-left: 1px solid #2b2b2b; }
+.t-sunbeam .x-cols .c-h {
+  margin-bottom: 14px; font-family: "Montserrat", Arial, sans-serif; font-weight: 600; font-size: 11px;
+  letter-spacing: 1.6px; text-transform: uppercase; color: #222222;
+}
+/* left column: title, school or company, then years */
+.t-sunbeam .x-left .c-entry { display: flex; flex-direction: column; }
+.t-sunbeam .x-left .c-entry + .c-entry { margin-top: 12px; }
+.t-sunbeam .x-left .c-item { display: contents; }
+.t-sunbeam .x-left .c-item b { order: 1; font-weight: 700; font-size: 10px; color: #2b2b2b; }
+.t-sunbeam .x-left .c-place { order: 2; }
+.t-sunbeam .x-left .c-item span { order: 3; white-space: normal; font-size: 9.5px; color: var(--muted); }
+.t-sunbeam .x-left .c-entry > p:not(.c-place),
+.t-sunbeam .x-left .c-entry > .c-rich { order: 4; color: var(--muted); }
+/* skills as a bullet list */
+.t-sunbeam .c-skill-list { gap: 7px; padding-left: 4px; color: #444444; }
+.t-sunbeam .c-skill-list div::before {
+  content: ""; display: inline-block; width: 4px; height: 4px; margin-right: 10px;
+  border-radius: 50%; background: #2b2b2b; vertical-align: middle;
+}
+/* right column: years on the left, job on the right, a yellow dot on the line */
+.t-sunbeam .x-right .c-entry { position: relative; display: grid; grid-template-columns: 62px minmax(0, 1fr); column-gap: 14px; }
+.t-sunbeam .x-right .c-entry + .c-entry { margin-top: 20px; }
+.t-sunbeam .x-right .c-entry::before { left: -27px; }
+.t-sunbeam .x-right .c-item { display: contents; }
+.t-sunbeam .x-right .c-item span {
+  grid-column: 1; grid-row: 1 / span 5; white-space: normal;
+  font-family: "Montserrat", Arial, sans-serif; font-weight: 700; font-size: 9.5px; color: #2b2b2b;
+}
+.t-sunbeam .x-right .c-item b { grid-column: 2; font-family: "Montserrat", Arial, sans-serif; font-weight: 700; font-size: 10px; }
+.t-sunbeam .x-right .c-place,
+.t-sunbeam .x-right .c-entry > p,
+.t-sunbeam .x-right .c-entry > .c-rich { grid-column: 2; color: var(--muted); line-height: 1.6; }
+
 /* Smaller cards need a smaller CV */
 @media (max-width: 1100px) {
   .thumb-box { --s: 0.42; }
